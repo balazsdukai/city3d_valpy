@@ -69,7 +69,7 @@ def iter_parse(context,element):
                 building = Building()
                 countBuilding+=1
                 idBuilding="NULL"
-                if elem.attrib.has_key("{%s}id" % nsmap["gml"]):
+                if "{%s}id" % nsmap["gml"] in elem.attrib:
                     idBuilding=elem.attrib["{%s}id" % nsmap["gml"]]
                 building.fid = idBuilding
                 #Roof=elem.findall('.//{%s}RoofSurface' % nsmap["bldg"])
@@ -79,12 +79,12 @@ def iter_parse(context,element):
                     gm_surface=bB.getchildren()[0]
                     role=gm_surface.tag[len(nsmap["bldg"])+2:]
                     gm_surfaceid="NULL"
-                    if gm_surface.attrib.has_key("{%s}id" % nsmap["gml"]):
+                    if "{%s}id" % nsmap["gml"] in gm_surface.attrib:
                         gm_surfaceid = gm_surface.attrib["{%s}id" % nsmap["gml"]]
                     polys = gm_surface.findall('.//{%s}Polygon' % nsmap["gml"])
                     for poly in polys:
                         polyid=gm_surfaceid
-                        if poly.attrib.has_key("{%s}id" % nsmap["gml"]):
+                        if "{%s}id" % nsmap["gml"] in poly.attrib:
                             polyid = poly.attrib["{%s}id" % nsmap["gml"]]
                         polyrings = parse_polygon(poly)
                         surf = Polygon()

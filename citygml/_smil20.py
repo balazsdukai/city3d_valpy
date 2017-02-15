@@ -4,7 +4,7 @@
 # Generated 2016-02-09 15:38:06.024388 by PyXB version 1.2.4 using Python 2.7.10.final.0
 # Namespace http://www.w3.org/2001/SMIL20/ [xmlns:smil20]
 
-from __future__ import unicode_literals
+
 import pyxb
 import pyxb.binding
 import pyxb.binding.saxer

@@ -23,7 +23,7 @@ def getxml():
     try:
         p = cgmlbase_1_0.CreateFromDocument(xml,location_base=path)
     except pyxb.ValidationError as e:
-        print e.details()
+        print(e.details())
     return p
 
 #import pyxb.namespace

@@ -34,7 +34,7 @@ def iterate_path(path):
 	#source_elements = root_source.getchildren()
 	for report in reports[1:]:
 		aggregate(root_source,report)
-	print etree.tostring(root_source,pretty_print=True)
+	print(etree.tostring(root_source,pretty_print=True))
 
 if __name__ == '__main__':
 	dirpath = '/home/dxin/result/'+sys.argv[1]

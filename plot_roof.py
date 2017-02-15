@@ -10,10 +10,10 @@ def main():
 	if path == '':
 		path = os.getcwd()+'/result/Linz_2011/report.xml'
 	root = etree.XML(open(path).read())
-	print path
-	print root
+	print(path)
+	print(root)
 	result = root.xpath("//surface[@type='GroundSurface' and validity[text()='False']]/orientation/text()")
-	print len(result)
+	print(len(result))
 	data = np.array([float(v) for v in result])
 	pl.hist(data)
 	pl.xlabel('orientation')

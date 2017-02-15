@@ -7,7 +7,7 @@
 # Namespace http://www.w3.org/2001/SMIL20/Language [xmlns:smil20lang]
 
 
-from __future__ import unicode_literals
+
 import pyxb
 import pyxb.binding
 import pyxb.utils.utility

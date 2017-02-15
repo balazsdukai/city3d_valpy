@@ -44,7 +44,7 @@ def data_read():
         return
     dataset = []
     for i in pathes:
-        print "Reading input file: %s" % i
+        print("Reading input file: %s" % i)
         cgml_model = cgml2class(i)
         if cgml_model:
             dataset.append(cgml_model)
@@ -57,7 +57,7 @@ def cgml2class(xml_path):
     try:
         cgml_model = citygml.cgml.CreateFromDocument(xml,location_base=xml_path)
     except pyxb.ValidationError as e:
-        print e.details()
+        print(e.details())
     return cgml_model
 
 def Building_push(dataset):
@@ -176,7 +176,7 @@ def Parsing_Solid(Solid3D,fid):
     for sh in Solid3D.content():
         if type(sh) == citygml._gml.SurfacePropertyType:
             solid.add_shell(Parsing_Surface(sh))
-    if solids.has_key(fid):
+    if fid in solids:
         solids[fid].append(solid)
     else:
         solids[fid] = [solid]
@@ -199,7 +199,7 @@ def Parsing_Surface(surface,role=None,fid=None):
         if composid==None:
             composid = str(uuid.uuid1())
         #print composid
-        if shells.has_key(composid):
+        if composid in shells:
             if shells[composid]:
                 return composid
         shell = Shell()
@@ -216,7 +216,7 @@ def Parsing_Surface(surface,role=None,fid=None):
 		global b_surfaceID
 		polyid = b_surfaceID
         #print polyid
-        if polys.has_key(polyid):
+        if polyid in polys:
             if polys[polyid]:
                 if fid not in polys[polyid].fid:
                     polys[polyid].add_fid(fid)
@@ -293,36 +293,36 @@ window_count = 0
 door_count = 0
 if __name__ == "__main__":
     dataset = data_read()
-    print "Files reading completely!"
+    print("Files reading completely!")
     if len(dataset)==0:
-        print "None Input!"
+        print("None Input!")
         pass 
     #feature_count = 0
     feature_property = dict()
     for data in dataset:
         feature_property.clear()
         feature_count = 0
-        print "processing data %s" % data._location().locationBase
+        print("processing data %s" % data._location().locationBase)
         if type(data)!=citygml.cgmlbase_1_0.CityModelType and \
            type(data)!=citygml.cgmlbase_2_0.CityModelType:
-            print "skip this data"
+            print("skip this data")
             continue
         #fish = fish.ProgressFish(total=len(data.content()))
-        print "Feature_Count in CityModel: %s" % len(data.content())
+        print("Feature_Count in CityModel: %s" % len(data.content()))
         for value in data.content():
             if type(value)==citygml._gml.FeaturePropertyType:
                 feature_count+=1
                 feature_type = type(value.Feature)._Name().split('}')
                 if not feature_type or len(feature_type)!=2:
-                    print "feature_type problem",feature_type,value.Feature
+                    print("feature_type problem",feature_type,value.Feature)
                     continue
                 f_type = feature_type[1]
-                if not feature_property.has_key(f_type):
+                if f_type not in feature_property:
                     feature_property[f_type] = 0
-                    print "Insert key %s" % f_type
+                    print("Insert key %s" % f_type)
                 feature_property[f_type]+=1
-        print "%s has been processed completely!" % data._location().locationBase
-        print "the amount of all thematic objects is %d" % feature_count
-        for k in feature_property.keys():
-            print "%s: %d" % (k,feature_property[k])
-        print '\n'
+        print("%s has been processed completely!" % data._location().locationBase)
+        print("the amount of all thematic objects is %d" % feature_count)
+        for k in list(feature_property.keys()):
+            print("%s: %d" % (k,feature_property[k]))
+        print('\n')

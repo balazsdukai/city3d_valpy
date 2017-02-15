@@ -7,5 +7,5 @@ def parsing_report(path):
     root = etree.XML(xml)
     return [f.text for f in root.findall('.//face')]
 
-if __name__="__main__":
-    print "\n"
+if __name__ == "__main__":
+    print("\n")

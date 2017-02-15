@@ -104,7 +104,7 @@ def write_report(buildings,surfaces):
 
     root = etree.Element('Semantic')
     if len(buildings) == 0:
-        print "\n"
+        print("\n")
         return
     for building in buildings:
         # if not cgml_reader.buildings.has_key(b_id):
@@ -335,7 +335,7 @@ def val_report(gm_buildings,gm_surfaces,path):
     # surfaces=gm_surfaces
     semantic_val(gm_buildings,gm_surfaces,path)
     root = write_report(gm_buildings,gm_surfaces)
-    print etree.tostring(root,pretty_print=True)
+    print(etree.tostring(root,pretty_print=True))
 
 if __name__ == "__main__":
     # bids = semantic_check()
